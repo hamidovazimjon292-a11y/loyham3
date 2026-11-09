@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<title>KeyCraft — Eng yoqimli klaviaturalar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1d0f09;--bg2:#2a160d;--card:#35200f;--tx:#f6ece2;--mut:#c9b4a2;--ac:#c98c5a;--ac2:#e0a574;--ln:#5a3a24;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--tx);font:16px/1.6 Inter,system-ui,sans-serif}
+h1,h2,h3,.logo{font-family:'Playfair Display',Georgia,serif}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0}
+:focus-visible{outline:2px solid var(--ac2);outline-offset:2px}
+.btn{background:var(--ac);color:#2a1208;padding:12px 24px;border-radius:99px;font-weight:600;transition:.2s}
+.btn:hover{background:var(--ac2);transform:translateY(-2px)}
+.btn.o{background:none;border:1px solid var(--ac);color:var(--tx)}
+.btn.o:hover{background:var(--ac);color:#2a1208}
+header{position:sticky;top:0;z-index:30;background:rgba(29,15,9,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--ln);padding-top:env(safe-area-inset-top,0px)}
+nav{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:16px}
+.logo{font-size:24px}.logo b{color:var(--ac)}
+.links{display:flex;gap:20px;font-size:14px;font-weight:600}
+.links a:hover{color:var(--ac2)}
+#burger{display:none;background:none;font-size:26px}
+section{max-width:1100px;margin:auto;padding:80px 20px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;min-height:80vh}
+.badge{display:inline-block;border:1px solid var(--ac);color:var(--ac2);border-radius:99px;padding:5px 14px;font-size:13px;cursor:pointer;margin-bottom:18px}
+h1{font-size:clamp(40px,6vw,68px);line-height:1.1;margin-bottom:20px}
+h1 em{color:var(--ac);font-style:normal}
+.hero p{color:var(--mut);max-width:440px;margin-bottom:28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.kb{background:var(--bg2);border:1px solid var(--ln);border-radius:24px;padding:22px;box-shadow:0 20px 50px #0008}
+.row{display:flex;gap:7px;justify-content:center;margin-bottom:7px}
+.key{width:clamp(26px,5.4vw,44px);height:clamp(30px,6vw,48px);border-radius:8px;background:#4a2e1a;border-bottom:4px solid #2a160d;color:var(--mut);font-weight:600;font-size:14px;transition:.08s}
+.key.on,.key:active{background:var(--ac);color:#2a1208;transform:translateY(3px);border-bottom-width:1px}
+.key.sp{width:60%}
+.cnt{text-align:center;color:var(--mut);font-size:14px;margin-top:12px}.cnt b{color:var(--ac2);font-size:22px}
+h2{font-size:clamp(30px,4vw,42px);margin-bottom:12px}
+.sub{color:var(--mut);margin-bottom:32px;max-width:560px}
+.abt{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:22px}
+.card .ic{font-size:30px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.fb{background:none;border:1px solid var(--ln);padding:8px 18px;border-radius:99px;color:var(--mut)}
+.fb.on,.fb:hover{background:var(--ac);color:#2a1208;border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.pr .em{background:var(--bg2);border-radius:14px;padding:10px;margin-bottom:14px;transition:.25s}.pr:hover .em{transform:translateY(-3px) rotate(-1deg)}.pr svg{width:100%;height:118px;display:block;filter:drop-shadow(0 10px 10px #0008)}
+.pr small{color:var(--ac2)}.pr .pz{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-weight:600}
+.pr .btn{padding:8px 16px;font-size:14px}
+.promos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.code{font:700 22px Georgia,serif;color:var(--ac2);letter-spacing:2px;margin:8px 0 14px}
+.promos .btn{padding:8px 14px;font-size:14px;margin-right:6px}
+.rev{text-align:center;max-width:640px;margin:auto}
+.rev blockquote{font:italic 22px/1.5 Georgia,serif;min-height:100px}
+.rev .who{color:var(--ac2);margin:12px 0 18px}
+.rev button{background:var(--card);border:1px solid var(--ln);width:42px;height:42px;border-radius:50%;margin:0 6px;font-size:18px}
+.rev button:hover{background:var(--ac);color:#2a1208}
+details{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:16px 20px;margin-bottom:12px}
+summary{cursor:pointer;font-weight:600}
+details p{color:var(--mut);margin-top:10px}
+form{display:grid;gap:12px;max-width:520px}
+input,textarea{background:var(--bg2);border:1px solid var(--ln);border-radius:12px;padding:12px 14px;width:100%}
+.err{color:#ff9d8a;font-size:14px;min-height:20px}
+footer{text-align:center;color:var(--mut);padding:30px;border-top:1px solid var(--ln)}
+#drawer{position:fixed;top:0;right:0;height:100%;width:min(400px,100%);background:var(--bg2);border-left:1px solid var(--ln);z-index:50;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column;padding:20px}
+#drawer.open{transform:none}
+#shade{position:fixed;inset:0;background:#0009;z-index:40;display:none}#shade.open{display:block}
+#items{flex:1;overflow:auto;margin:16px 0}
+.it{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ln)}
+.it span:first-child{font-size:28px}.it div{flex:1;font-size:14px}
+.q{background:var(--card);width:28px;height:28px;border-radius:50%}
+.pm{display:flex;gap:8px;margin-bottom:10px}.pm .btn{padding:8px 16px}
+.tot{display:flex;justify-content:space-between;font-size:20px;font-weight:600;margin-bottom:12px}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--ac);color:#2a1208;padding:12px 22px;border-radius:99px;font-weight:600;z-index:90;transition:.3s}
+#toast.show{transform:translate(-50%,0)}
+@media(max-width:820px){.hero,.abt,.promos{grid-template-columns:1fr}.links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);flex-direction:column;padding:16px 20px;border-bottom:1px solid var(--ln)}.links.open{display:flex}#burger{display:block}.hero{min-height:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><nav>
+<a class="logo" href="#bosh">⌨️ Key<b>Craft</b></a>
+<div class="links" id="links">
+<a href="#bosh">Bosh sahifa</a><a href="#haqimizda">Biz haqimizda</a><a href="#katalog">Katalog</a><a href="#promo">Promokodlar</a><a href="#fikrlar">Fikrlar</a><a href="#savollar">Savollar</a><a href="#aloqa">Aloqa</a>
+</div>
+<button class="btn" id="cartBtn">🛒 Buyurtma (<span id="cc">0</span>)</button>
+<button id="burger" aria-label="Menyu">☰</button>
+</nav></header>
+
+<section class="hero" id="bosh">
+<div>
+<span class="badge" id="badge">🎁 Birinchi buyurtmaga −10% · KEY10</span>
+<h1>Har bir bosishda<br><em>mukammal tuyg’u</em></h1>
+<p>Mexanik, simsiz va o’yin klaviaturalari. Tugmalarni sinab ko’ring, o’zingizga mosini tanlang — biz tez yetkazib beramiz.</p>
+<div class="cta"><a class="btn" href="#katalog">Katalogni ko’rish</a><a class="btn o" href="#promo">Promokodlar 🎁</a></div>
+</div>
+<div class="kb" id="kb">
+<div id="rows"></div>
+<div class="cnt">Bosilgan tugmalar: <b id="kc">0</b><br>Klaviaturangizda yozib ko’ring!</div>
+</div>
+</section>
+
+<section id="haqimizda">
+<h2>Biz haqimizda</h2>
+<p class="sub">KeyCraft — 2019-yildan beri Toshkentda klaviatura sevuvchilar uchun ishlaydigan do’kon.</p>
+<div class="abt">
+<div class="card"><div class="ic">🔧</div><h3>Qo’lda yig’ilgan</h3><p>Har bir klaviatura yuborishdan oldin sinovdan o’tadi.</p></div>
+<div class="card"><div class="ic">🚚</div><h3>Tez yetkazish</h3><p>Toshkent bo’ylab 1 kunda, viloyatlarga 2–3 kunda.</p></div>
+<div class="card"><div class="ic">🛡️</div><h3>1 yil kafolat</h3><p>Nosozlik bo’lsa, bepul almashtirib beramiz.</p></div>
+</div>
+</section>
+
+<section id="katalog">
+<h2>Katalog</h2>
+<p class="sub">Turini tanlang va savatga qo’shing.</p>
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section id="promo">
+<h2>Promokodlar</h2>
+<p class="sub">Nusxalang yoki bir bosishda savatga qo’llang.</p>
+<div class="promos" id="promos"></div>
+</section>
+
+<section id="fikrlar">
+<div class="rev">
+<h2>Mijozlar fikrlari</h2>
+<blockquote id="rq"></blockquote>
+<div class="who" id="rw"></div>
+<button id="prev" aria-label="Oldingi">‹</button><button id="next" aria-label="Keyingi">›</button>
+</div>
+</section>
+
+<section id="savollar">
+<h2>Savollar</h2><p class="sub">Ko’p so’raladigan savollarga javoblar.</p>
+<details open><summary>Qanday to’lov usullari bor?</summary><p>Naqd pul, Payme, Click va bank kartasi orqali to’lash mumkin.</p></details>
+<details><summary>Klaviaturani qaytarsam bo’ladimi?</summary><p>Ha, 14 kun ichida ishlatilmagan mahsulotni qaytarib olamiz.</p></details>
+<details><summary>Qaysi switch menga mos?</summary><p>Jim ish uchun qizil, aniq bosish uchun jigarrang, tovush yoqsa ko’k switch.</p></details>
+<details><summary>Yetkazib berish qancha turadi?</summary><p>Toshkentda 20 000 so’m, 500 000 so’mdan yuqori buyurtmada bepul.</p></details>
+</section>
+
+<section id="aloqa">
+<h2>Aloqa</h2><p class="sub">Savolingiz bormi? Yozing, 1 soat ichida javob beramiz.</p>
+<form id="cf" novalidate>
+<input id="fn" placeholder="Ismingiz"><input id="fp" placeholder="Telefon: +998 90 123 45 67"><textarea id="fm" rows="4" placeholder="Xabaringiz"></textarea>
+<div class="err" id="fe"></div>
+<button class="btn" type="submit">Xabar yuborish</button>
+</form>
+</section>
+<footer>© 2026 KeyCraft · Toshkent</footer>
+
+<div id="shade"></div>
+<aside id="drawer" aria-label="Savat">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0;font-size:26px">Savat</h2><button class="q" id="closeC" aria-label="Yopish">✕</button></div>
+<div id="items"></div>
+<div class="pm"><input id="pi" placeholder="Promokod"><button class="btn" id="pa">Qo’llash</button></div>
+<div class="err" id="pe"></div>
+<div class="tot"><span>Jami:</span><span id="tt">0 so’m</span></div>
+<button class="btn" id="chk">Buyurtma berish</button>
+</aside>
+<div id="toast"></div>
+
+<script>
+const P=[
+{id:1,n:'Keychron K2 Pro',t:'Simsiz',p:1290,e:'⌨️'},
+{id:2,n:'Redragon Kumara',t:'Mexanik',p:520,e:'🎹'},
+{id:3,n:'Logitech G Pro X',t:'O’yin',p:1450,e:'🎮'},
+{id:4,n:'Royal Kludge RK84',t:'Simsiz',p:780,e:'📡'},
+{id:5,n:'Akko 3068B',t:'Mexanik',p:890,e:'🧩'},
+{id:6,n:'Logitech MX Keys',t:'Ofis',p:960,e:'💼'},
+{id:7,n:'HyperX Alloy Origins',t:'O’yin',p:1180,e:'🕹️'},
+{id:8,n:'Keychron K8',t:'Ofis',p:1050,e:'🖥️'}];
+P.length=0;P.push(
+{id:1,n:'Keychron K2 Pro',t:'Simsiz',p:1290,e:'⌨️',l:'75',c:['#d9cbb8','#f2e8da','#c98c5a','#8a6a4c']},
+{id:2,n:'Redragon Kumara',t:'Mexanik',p:520,e:'🎹',l:'tkl',r:1,c:['#2b2b2f','#3d3d44','#e0554a','#9a9aa5']},
+{id:3,n:'Logitech G Pro X',t:'O’yin',p:1450,e:'🎮',l:'tkl',r:1,c:['#17171c','#2a2a33','#4de1ff','#8fe9ff']},
+{id:4,n:'Royal Kludge RK84',t:'Simsiz',p:780,e:'📡',l:'75',c:['#e8b5c4','#f7e3ea','#a3607a','#8a4a63']},
+{id:5,n:'Akko 3068B',t:'Kompakt',p:890,e:'🧩',l:'60',c:['#3b5a6b','#c9d8de','#e0a574','#3b5a6b']},
+{id:6,n:'Logitech MX Keys',t:'Ofis',p:960,e:'💼',l:'full',c:['#cfd2d6','#f4f5f7','#6a7380','#5a6270']},
+{id:7,n:'HyperX Alloy Origins',t:'O’yin',p:1180,e:'🕹️',l:'tkl',r:1,c:['#1b1020','#2d1b36','#ff4d9d','#e0a0cc']},
+{id:8,n:'Keychron K8',t:'Ofis',p:1050,e:'🖥️',l:'tkl',c:['#5a6b4d','#dfe6d3','#c98c5a','#4a5a3e']},
+{id:9,n:'Razer BlackWidow V4',t:'O’yin',p:1690,e:'🐍',l:'full',r:1,c:['#101010','#1f1f1f','#44d62c','#7dff63']},
+{id:10,n:'Ducky One 3 Mini',t:'Kompakt',p:1120,e:'🦆',l:'60',c:['#e6e0f0','#fbf8ff','#8a6fd1','#6d5a9c']},
+{id:11,n:'Corsair K70 RGB',t:'O’yin',p:1550,e:'⚔️',l:'full',r:1,c:['#1c1f26','#2e333d','#ffd23f','#c8ccd6']},
+{id:12,n:'Logitech K380',t:'Simsiz',p:330,e:'📶',l:'60',c:['#b8c4d6','#e9eef6','#6f8fbf','#58718f']},
+{id:13,n:'Apple Magic Keyboard',t:'Ofis',p:1390,e:'🍏',l:'full',c:['#e6e7e9','#fafafa','#b5b7bc','#6a6c70']},
+{id:14,n:'Glorious GMMK 2',t:'Mexanik',p:1240,e:'🔶',l:'tkl',c:['#2d2d33','#c9c9d1','#ff7b3a','#555560']},
+{id:15,n:'Epomaker TH80',t:'Mexanik',p:980,e:'🌅',l:'75',c:['#f5d9a8','#fff4de','#e07a5f','#9a6b4a']},
+{id:16,n:'Anne Pro 2',t:'Kompakt',p:840,e:'🌿',l:'60',c:['#bfe3d0','#eefaf3','#4aa37a','#3b7a5c']}
+);
+const C=[{c:'KEY10',d:10,t:'Birinchi buyurtmaga −10%'},{c:'GAMER15',d:15,t:'O’yin klaviaturalariga −15%'},{c:'YANGI20',d:20,t:'Yangi yil aksiyasi −20%'}];
+const R=[['Tugmalar juda yoqimli bosiladi, tovushi ham a’lo. Kechasi ham ishlayman, hech kimga xalaqit bermaydi.','Jasur, dasturchi'],['Buyurtma ertasigayoq keldi. Qadoqlash puxta, klaviatura sinovdan o’tgan ekan.','Madina, dizayner'],['O’yinlarda javob tezligi sezilarli yaxshilandi. Narxi ham hamyonbop.','Sardor, o’yinchi']];
+let cart={},promo=null,ri=0,kcount=0,flt='Hammasi';
+const $=s=>document.getElementById(s),f=n=>n.toLocaleString('ru-RU').replace(/,/g,' ');
+const price=n=>f(n*1000)+' so’m';
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t.h);t.h=setTimeout(()=>t.classList.remove('show'),2200)}
+
+// keyboard
+const KR=['QWERTYUIOP','ASDFGHJKL','ZXCVBNM'];
+$('rows').innerHTML=KR.map(r=>'<div class="row">'+[...r].map(k=>`<button class="key" data-k="${k}">${k}</button>`).join('')+'</div>').join('')+'<div class="row"><button class="key sp" data-k=" ">BOSH JOY</button></div>';
+function press(k){const el=document.querySelector(`.key[data-k="${k===' '?' ':k.toUpperCase()}"]`);if(!el)return;el.classList.add('on');setTimeout(()=>el.classList.remove('on'),120);$('kc').textContent=++kcount}
+$('rows').onclick=e=>{const k=e.target.closest('.key');if(k)press(k.dataset.k)};
+document.addEventListener('keydown',e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName))return;if(e.key.length===1)press(e.key)});
+
+// klaviatura rasmlari (SVG)
+function kbSvg(p){
+const [cs,ks,md,lg]=p.c,u=14,pd=10,id='k'+p.id;
+const sh=(h,f)=>'#'+[1,3,5].map(i=>Math.round(parseInt(h.substr(i,2),16)*f).toString(16).padStart(2,'0')).join('');
+const key=(x,y,w,t)=>{const c=t===2?md:t===1?sh(ks,.86):ks,W=w*u-2;
+return `<rect x="${x}" y="${y+1}" width="${W}" height="12" rx="3" fill="${sh(c,.7)}"/><rect x="${x+.8}" y="${y}" width="${W-1.6}" height="10.6" rx="2.6" fill="${c}"/><rect x="${x+2}" y="${y+1}" width="${W-4}" height="2" rx="1" fill="#fff" opacity=".22"/>`+(t||w>1?'':`<circle cx="${x+W/2}" cy="${y+6}" r="1.2" fill="${lg}" opacity=".7"/>`)};
+const R=[[...Array(13).fill(1),2],[1.5,...Array(12).fill(1),1.5],[1.75,...Array(11).fill(1),2.25],[2.25,...Array(10).fill(1),2.75],[1.25,1.25,1.25,6.25,1.25,1.25,1.25,1.25]];
+let s='';
+R.forEach((row,r)=>{let x=pd;row.forEach((w,i)=>{s+=key(x,pd+r*u,w,(r===0&&i===0)||(r===2&&i===row.length-1)?2:(w!==1?1:0));x+=w*u})});
+let ex=pd+15*u;
+if(p.l==='75'){ex+=8;for(let r=0;r<5;r++)s+=key(ex,pd+r*u,1,r===0?2:1);ex+=u}
+else if(p.l!=='60'){ex+=8;for(let r=0;r<2;r++)for(let c=0;c<3;c++)s+=key(ex+c*u,pd+r*u,1,1);s+=key(ex+u,pd+3*u,1,1);for(let c=0;c<3;c++)s+=key(ex+c*u,pd+4*u,1,1);ex+=3*u;
+if(p.l==='full'){ex+=8;for(let r=0;r<4;r++)for(let c=0;c<4;c++)s+=key(ex+c*u,pd+r*u,1,c===3&&r===0?2:0);s+=key(ex,pd+4*u,2,0)+key(ex+2*u,pd+4*u,1,0)+key(ex+3*u,pd+4*u,1,2);ex+=4*u}}
+const W=ex+pd,H=2*pd+5*u;
+return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${p.n}"><defs><linearGradient id="${id}" x1="0" x2="1"><stop offset="0" stop-color="#ff3b6b"/><stop offset=".33" stop-color="#ffd23f"/><stop offset=".66" stop-color="#3bff9d"/><stop offset="1" stop-color="#3b8bff"/></linearGradient></defs><rect x="1" y="1" width="${W-2}" height="${H-2}" rx="10" fill="${cs}"/><rect x="5" y="5" width="${W-10}" height="${H-10}" rx="7" fill="${sh(cs,.78)}"/>${s}`+(p.r?`<rect x="1" y="1" width="${W-2}" height="${H-2}" rx="10" fill="none" stroke="url(#${id})" stroke-width="2"/>`:'')+'</svg>'}
+function kbSvgOld(id){
+const [cs,ks,ac]={1:['#d9cbb8','#f2e8da','#c98c5a'],2:['#2b2b2f','#3d3d44','#e0554a'],3:['#17171c','#2a2a33','#4de1ff'],4:['#e8b5c4','#f7e3ea','#a3607a'],5:['#3b5a6b','#c9d8de','#e0a574'],6:['#cfd2d6','#f4f5f7','#6a7380'],7:['#1b1020','#2d1b36','#ff4d9d'],8:['#5a6b4d','#dfe6d3','#c98c5a']}[id];
+let s=`<svg viewBox="0 0 200 76" role="img" aria-label="Klaviatura"><rect x="2" y="2" width="196" height="72" rx="8" fill="${cs}"/>`;
+[13,12,11].forEach((n,r)=>{for(let i=0;i<n;i++){const a=(r===0&&i===0)||(r===2&&i===n-1);s+=`<rect x="${8+r*4+i*14}" y="${10+r*14}" width="11.5" height="11.5" rx="2.5" fill="${a?ac:ks}"/>`}});
+[12,26,40,140,154,168].forEach(x=>s+=`<rect x="${x}" y="52" width="11.5" height="11.5" rx="2.5" fill="${ks}"/>`);
+s+=`<rect x="54" y="52" width="82" height="11.5" rx="2.5" fill="${ks}"/><rect x="10" y="67" width="180" height="2" rx="1" fill="${ac}"/></svg>`;return s}
+
+// catalog
+const cats=['Hammasi','Mexanik','Simsiz','O’yin','Ofis','Kompakt'];
+$('filters').innerHTML=cats.map(c=>`<button class="fb${c==='Hammasi'?' on':''}" data-c="${c}">${c}</button>`).join('');
+$('filters').onclick=e=>{const b=e.target.closest('.fb');if(!b)return;flt=b.dataset.c;document.querySelectorAll('.fb').forEach(x=>x.classList.toggle('on',x===b));draw()};
+function draw(){$('grid').innerHTML=P.filter(p=>flt==='Hammasi'||p.t===flt).map(p=>`<div class="card pr"><div class="em">${kbSvg(p)}</div><small>${p.t}</small><h3>${p.n}</h3><div class="pz"><span>${price(p.p)}</span><button class="btn" data-a="${p.id}">Savatga</button></div></div>`).join('')}
+$('grid').onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const id=b.dataset.a;cart[id]=(cart[id]||0)+1;upd();toast('Savatga qo’shildi ✓')};
+draw();
+
+// promos
+$('promos').innerHTML=C.map(c=>`<div class="card"><div class="ic">🎁</div><p>${c.t}</p><div class="code">${c.c}</div><button class="btn o" data-cp="${c.c}">Nusxalash</button><button class="btn" data-ap="${c.c}">Qo’llash</button></div>`).join('');
+$('promos').onclick=e=>{const a=e.target.closest('[data-cp]'),b=e.target.closest('[data-ap]');
+if(a){try{navigator.clipboard.writeText(a.dataset.cp)}catch(x){}toast('Nusxalandi: '+a.dataset.cp)}
+if(b){applyPromo(b.dataset.ap);openC()}};
+$('badge').onclick=()=>{applyPromo('KEY10');openC()};
+
+// cart
+function total(){return Object.entries(cart).reduce((s,[id,q])=>s+P.find(p=>p.id==id).p*q,0)}
+function upd(){
+const ids=Object.keys(cart);$('cc').textContent=ids.reduce((s,i)=>s+cart[i],0);
+$('items').innerHTML=ids.length?ids.map(i=>{const p=P.find(x=>x.id==i);return `<div class="it"><span>${p.e}</span><div>${p.n}<br><small>${price(p.p)}</small></div><button class="q" data-m="${i}">−</button><b>${cart[i]}</b><button class="q" data-p="${i}">+</button><button class="q" data-d="${i}" aria-label="O’chirish">🗑</button></div>`}).join(''):'<p style="color:var(--mut)">Savat bo’sh. Katalogdan klaviatura tanlang.</p>';
+let t=total(),d=promo?Math.round(t*promo.d/100):0;
+$('tt').textContent=price(t-d)+(d?' (−'+promo.d+'%)':'')}
+$('items').onclick=e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+if(d.p)cart[d.p]++;if(d.m&&--cart[d.m]<=0)delete cart[d.m];if(d.d)delete cart[d.d];upd()};
+function applyPromo(c){const m=C.find(x=>x.c===c.trim().toUpperCase());
+if(m){promo=m;$('pe').textContent='';toast('Promokod qo’llandi: −'+m.d+'%');upd()}else{$('pe').textContent='Bunday promokod topilmadi. KEY10 ni sinab ko’ring.'}}
+$('pa').onclick=()=>applyPromo($('pi').value);
+function openC(){$('drawer').classList.add('open');$('shade').classList.add('open');upd()}
+function closeC(){$('drawer').classList.remove('open');$('shade').classList.remove('open')}
+$('cartBtn').onclick=openC;$('closeC').onclick=closeC;$('shade').onclick=closeC;
+$('chk').onclick=()=>{if(!total()){$('pe').textContent='Avval savatga mahsulot qo’shing.';return}
+toast('Buyurtma qabul qilindi! Tez orada bog’lanamiz 🎉');cart={};promo=null;upd();closeC()};
+
+// reviews
+function rv(){$('rq').textContent='“'+R[ri][0]+'”';$('rw').textContent=R[ri][1]}
+$('prev').onclick=()=>{ri=(ri+R.length-1)%R.length;rv()};$('next').onclick=()=>{ri=(ri+1)%R.length;rv()};rv();
+setInterval(()=>{ri=(ri+1)%R.length;rv()},7000);
+
+// form
+$('cf').onsubmit=e=>{e.preventDefault();const n=$('fn').value.trim(),p=$('fp').value.replace(/\D/g,''),m=$('fm').value.trim();
+if(n.length<2)return $('fe').textContent='Ismingizni kiriting.';
+if(p.length<9)return $('fe').textContent='Telefon raqamini to’liq kiriting.';
+if(m.length<5)return $('fe').textContent='Xabaringizni yozing.';
+$('fe').textContent='';$('cf').reset();toast('Xabar yuborildi, rahmat! ✓')};
+
+// mobile menu
+$('burger').onclick=()=>$('links').classList.toggle('open');
+$('links').onclick=e=>{if(e.target.tagName==='A')$('links').classList.remove('open')};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeC()});
+upd();
+</script>
+</body>
+</html>
